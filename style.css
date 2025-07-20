@@ -1,0 +1,717 @@
+/* Импорт шрифтов с Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&family=Orbitron:wght@600;700&display=swap');
+
+/* Определение CSS-переменных для цветов (схема по умолчанию - темная) */
+:root {
+    --bg-primary: #0d0d0d; /* Основной фон тела */
+    --bg-secondary: #0a0a0a; /* Фон шапки и футера */
+    --bg-main-content: #1a1a1a; /* Фон основного контейнера */
+    --bg-section: #1f1f1f; /* Фон для всех секций */
+    --bg-faq-item: #2a2a2a; /* Фон для элементов FAQ */
+    --border-main: #2a2a2a; /* Основная граница */
+    --border-secondary: #222; /* Вторичная граница (например, header/footer) */
+    --border-faq-item: #3c3c3c; /* Граница для элементов FAQ */
+    --text-primary: #e0e0e0; /* Основной текст */
+    --text-secondary: #a0a0a0; /* Вторичный текст (подзаголовки, футер) */
+    --text-tertiary: #b0b0b0; /* Третичный текст (параграфы FAQ) */
+    --accent-color: #00bcd4; /* Акцентный цвет (бирюзовый) */
+    --accent-color-hover: #0097a7; /* Акцентный цвет при наведении */
+    --button-text-color: #0d0d0d; /* Цвет текста на акцентных кнопках */
+    --shadow-color-primary: rgba(0, 0, 0, 0.4); /* Основная тень */
+    --shadow-color-secondary: rgba(0, 188, 212, 0.3); /* Тень для кнопок */
+    --shadow-color-hover: rgba(0, 188, 212, 0.5); /* Тень для кнопок при наведении */
+    --shadow-social-icon: rgba(0, 188, 212, 0.4); /* Тень для соц. иконок */
+    --shadow-social-icon-hover: rgba(0, 188, 212, 0.6); /* Тень для соц. иконок при наведении */
+    --pattern-opacity: 0.05; /* Прозрачность паттерна для темной темы */
+    --background-pattern: url('images/dark-pattern.png'); /* Путь к темному паттерну */
+}
+
+/* Альтернативная тема (light-theme - светлая) */
+body.light-theme {
+    --bg-primary: #f5f5f5; /* Светлый фон тела */
+    --bg-secondary: #ffffff; /* Светлый фон шапки и футера */
+    --bg-main-content: #ffffff; /* Светлый фон основного контейнера */
+    --bg-section: #f0f0f0; /* Светлый фон для всех секций */
+    --bg-faq-item: #e8e8e8; /* Светлый фон для элементов FAQ */
+    --border-main: #dddddd; /* Светлая граница */
+    --border-secondary: #eeeeee; /* Вторичная светлая граница */
+    --border-faq-item: #d0d0d0; /* Граница для элементов FAQ */
+    --text-primary: #333333; /* Основной темный текст */
+    --text-secondary: #666666; /* Вторичный темный текст */
+    --text-tertiary: #555555; /* Третичный темный текст */
+    --accent-color: #007bff; /* Синий акцентный цвет */
+    --accent-color-hover: #0056b3; /* Синий акцентный цвет при наведении */
+    --button-text-color: #ffffff; /* Цвет текста на акцентных кнопках (белый) */
+    --shadow-color-primary: rgba(0, 0, 0, 0.1); /* Легкая тень */
+    --shadow-color-secondary: rgba(0, 123, 255, 0.2); /* Тень для кнопок */
+    --shadow-color-hover: rgba(0, 123, 255, 0.3); /* Тень для кнопок при наведении */
+    --shadow-social-icon: rgba(0, 123, 255, 0.2); /* Тень для соц. иконок */
+    --shadow-social-icon-hover: rgba(0, 123, 255, 0.3); /* Тень для соц. иконок при наведении */
+    --pattern-opacity: 0.15; /* Прозрачность паттерна для светлой темы */
+    --background-pattern: url('images/light-pattern.png'); /* Путь к светлому паттерну */
+}
+
+/* Общие стили для всего сайта */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary); /* Используем переменную */
+    color: var(--text-primary); /* Используем переменную */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+    transition: background-color 0.5s ease; /* Плавный переход для фона */
+    animation: fadeIn 0.5s ease-out forwards; /* Добавляем анимацию появления при загрузке */
+}
+
+/* Элемент для паттерна, чтобы можно было контролировать его прозрачность отдельно */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Теперь используем переменную для пути к паттерну */
+    background-image: var(--background-pattern); 
+    background-repeat: repeat;
+    background-size: 200px; /* Размер паттерна */
+    opacity: var(--pattern-opacity); /* Управление прозрачностью через переменную */
+    z-index: -2; /* Помещаем под все, но над основным фоном */
+    transition: opacity 0.5s ease, background-image 0.5s ease; /* Плавный переход для прозрачности и изображения паттерна */
+}
+
+/* ... Остальной CSS-код без изменений ... */
+
+/* Стили для заголовка сайта */
+header {
+    background-color: var(--bg-secondary);
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-secondary);
+    /* Стили для параллакса */
+    background-image: url('header-bg.jpg'); /* !!! ЗАМЕНИ НА СВОЙ ПУТЬ К ИЗОБРАЖЕНИЮ !!! */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: background-color 0.5s ease, border-color 0.5s ease; /* Добавлено для плавности */
+}
+
+/* Добавляем темный оверлей на изображение, чтобы текст был читаемым */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+/* Анимация для заголовков */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Анимация общего появления страницы */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+header h1 {
+    font-family: 'Orbitron', sans-serif; /* ИСПОЛЬЗУЕМ НОВЫЙ ШРИФТ ЗДЕСЬ */
+    font-size: 3.5em; /* Чуть увеличим размер */
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 5px; /* Увеличим межбуквенный интервал */
+    margin-bottom: 10px;
+    font-weight: 700;
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+    transition: color 0.5s ease; /* Добавлено для плавности */
+}
+
+header p {
+    font-size: 1.2em;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+    transition: color 0.5s ease; /* Добавлено для плавности */
+}
+
+header h2 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5em;
+    color: var(--accent-color);
+    margin-top: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.8s;
+    opacity: 0;
+    transition: color 0.5s ease; /* Добавлено для плавности */
+}
+
+/* Основной контент сайта */
+main {
+    flex: 1;
+    padding: 50px 20px;
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: var(--bg-main-content);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px var(--shadow-color-primary);
+    border: 1px solid var(--border-main);
+    transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease; /* Добавлено для плавности */
+}
+
+/* Стили для каждой секции (музыка, обменники, донат, FAQ, контакты) */
+section {
+    margin-bottom: 60px;
+    padding: 40px;
+    background-color: var(--bg-section);
+    border-radius: 6px;
+    border: 1px solid var(--border-main);
+    box-shadow: 0 2px 10px var(--shadow-color-primary);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease, border-color 0.5s ease;
+}
+
+section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-color-primary);
+}
+
+section h2 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2.5em;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: color 0.5s ease; /* Добавляем transition для цвета */
+}
+
+section p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-tertiary);
+    font-size: 1.1em;
+    transition: color 0.5s ease; /* Добавляем transition для цвета */
+}
+
+/* Стили для списков (например, обменников) */
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+ul li {
+    margin-bottom: 0;
+}
+
+/* Стили для кнопок и ссылок */
+.button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+    padding: 18px 40px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Добавляем color transition */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    box-shadow: 0 2px 10px var(--shadow-color-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover {
+    background-color: var(--accent-color-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--shadow-color-hover);
+}
+
+/* Отступ для иконок внутри кнопок */
+.button i {
+    margin-right: 8px;
+}
+
+/* Стили для футера */
+footer {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 25px;
+    margin-top: auto;
+    border-top: 1px solid var(--border-secondary);
+    font-size: 0.9em;
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Стили для переключателя языка и темы */
+.lang-switcher {
+    text-align: right;
+    margin-bottom: 20px;
+    padding-right: 20px;
+}
+
+.lang-button {
+    background-color: var(--bg-faq-item);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-faq-item);
+    padding: 8px 12px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9em;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.lang-button:hover {
+    background-color: var(--bg-faq-item);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+.lang-button.active {
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+    border-color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Специальные стили для кнопки переключения темы */
+.theme-toggle-button {
+    font-size: 1em; /* Больше, чем текст, но меньше, чем иконки соцсетей */
+    padding: 8px 10px; /* Немного уже */
+}
+
+/* Секция FAQ (Аккордеон) */
+.faq-section {
+    margin-bottom: 60px;
+    padding: 40px;
+    background-color: var(--bg-section);
+    border-radius: 6px;
+    border: 1px solid var(--border-main);
+    box-shadow: 0 2px 10px var(--shadow-color-primary);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.faq-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-color-primary);
+}
+
+.faq-section h2 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2.5em;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: color 0.5s ease; /* Добавляем transition для цвета */
+}
+
+.faq-item {
+    background-color: var(--bg-faq-item);
+    padding: 20px 25px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-faq-item);
+    box-shadow: 0 1px 5px var(--shadow-color-primary);
+    transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.faq-item h3.faq-question {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    color: var(--text-primary);
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.faq-item h3.faq-question:hover {
+    color: var(--accent-color);
+}
+
+.faq-item .faq-icon {
+    font-size: 0.8em;
+    transition: transform 0.3s ease, color 0.5s ease;
+    margin-left: 15px;
+    color: var(--text-secondary);
+}
+
+.faq-item h3.faq-question.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-item p.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, color 0.5s ease;
+    opacity: 0;
+    padding: 0 10px;
+    margin-top: 0;
+    color: var(--text-tertiary);
+    font-size: 1em;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.faq-item p.faq-answer.open {
+    max-height: 200px; /* Установите достаточно большое значение */
+    opacity: 1;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+/* Секция Контакты */
+.contact-section {
+    padding: 40px;
+    background-color: var(--bg-section);
+    border-radius: 6px;
+    border: 1px solid var(--border-main);
+    box-shadow: 0 2px 10px var(--shadow-color-primary);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease, border-color 0.5s ease;
+    margin-bottom: 60px;
+}
+
+.contact-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-color-primary);
+}
+
+.contact-section h2 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2.5em;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: color 0.5s ease;
+}
+
+.contact-section p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-tertiary);
+    font-size: 1.1em;
+    transition: color 0.5s ease;
+}
+
+/* Контейнер для кнопок контактов */
+.contact-links-container {
+    display: flex;
+    justify-content: center; /* Центрируем элементы по горизонтали */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    width: 100%; /* Занимаем всю доступную ширину */
+    max-width: 600px; /* Увеличим максимальную ширину для 4 кнопок */
+    margin: 30px auto 0 auto; /* Центрируем контейнер */
+    gap: 20px; /* Отступ между элементами */
+    flex-wrap: wrap; /* Позволяем элементам переноситься на новую строку */
+    box-sizing: border-box; /* Учитываем padding в ширине */
+    padding: 0 20px; /* Небольшой padding по бокам, чтобы не прилипало к краю */
+}
+
+/* Стили для всех контактных текстовых ссылок */
+.contact-text-link {
+    display: inline-flex; 
+    align-items: center; 
+    background-color: var(--accent-color);
+    color: var(--button-text-color); 
+    padding: 15px 30px; 
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1.1em; 
+    white-space: nowrap; /* Запрещает перенос текста на новую строку */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-color-secondary);
+    /* Добавляем flex-grow для равномерного распределения */
+    flex-grow: 1; 
+    /* Максимальная ширина для кнопок, чтобы они не были слишком широкими на больших экранах */
+    max-width: 280px; 
+    justify-content: center; /* Центрируем содержимое кнопки */
+}
+
+.contact-text-link i {
+    margin-right: 10px; 
+    font-size: 1.2em; 
+}
+
+.contact-text-link:hover {
+    background-color: var(--accent-color-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--shadow-color-hover);
+}
+
+
+/* Новые стили для кнопок доната напрямую */
+.donate-buttons-container {
+    display: flex;
+    justify-content: center; /* Центрируем кнопки */
+    gap: 20px; /* Отступ между кнопками */
+    flex-wrap: wrap; /* Позволяем кнопкам переноситься на новую строку на маленьких экранах */
+    margin-top: 20px;
+    margin-bottom: 20px; /* Отступ от текста */
+}
+
+.donate-buttons-container .button {
+    min-width: 180px; /* Минимальная ширина для каждой кнопки */
+    padding: 15px 30px; /* Немного меньше padding, чем у основных кнопок */
+    font-size: 1em; /* Чуть меньше шрифт */
+}
+
+.disclaimer-text {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-top: 15px; /* Отступ от кнопок */
+    transition: color 0.5s ease;
+}
+
+/* Анимации для плавного изменения языка */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-out; 
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+}
+
+/* --- Медиазапросы для адаптивности --- */
+
+/* Для планшетов (ширина экрана до 992px) */
+@media (max-width: 992px) {
+    main {
+        padding: 40px 15px;
+        margin: 25px auto;
+    }
+
+    section {
+        padding: 30px;
+        margin-bottom: 50px;
+    }
+
+    header h1 {
+        font-size: 2.5em;
+        letter-spacing: 3px;
+    }
+
+    header p {
+        font-size: 1.1em;
+    }
+    
+    header h2 {
+        font-size: 1.3em;
+    }
+
+    section h2 {
+        font-size: 2em;
+    }
+
+    .button {
+        padding: 15px 30px;
+        font-size: 0.9em;
+    }
+
+    .contact-text-link {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    
+    .contact-links-container {
+        padding: 0 10px; /* Уменьшим padding на планшетах */
+        max-width: 500px; /* Уменьшим максимальную ширину для 4 кнопок */
+    }
+
+    .donate-buttons-container .button {
+        padding: 12px 25px;
+        font-size: 0.9em;
+    }
+}
+
+/* Для мобильных устройств (ширина экрана до 768px) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+        letter-spacing: 2px;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    header h2 {
+        font-size: 1.1em;
+    }
+
+    main {
+        margin: 15px 10px;
+        padding: 30px 15px;
+    }
+
+    section {
+        margin-bottom: 40px;
+        padding: 25px 20px;
+    }
+
+    section h2 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+
+    section p {
+        font-size: 1em;
+    }
+
+    ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .button {
+        width: 85%;
+        max-width: 350px;
+        padding: 14px 25px;
+        font-size: 0.85em;
+    }
+
+    footer {
+        padding: 20px 10px;
+        font-size: 0.8em;
+    }
+
+    .lang-switcher {
+        text-align: center;
+        padding-right: 0;
+        margin-top: -20px;
+        margin-bottom: 15px;
+    }
+    .lang-button {
+        padding: 6px 10px;
+        font-size: 0.85em;
+    }
+
+    .faq-item {
+        padding: 15px 20px;
+    }
+    .faq-item h3 {
+        font-size: 1.2em;
+    }
+    .faq-item p {
+        font-size: 0.95em;
+    }
+
+    /* На мобильных устройствах делаем кнопки контактов опять по центру и в столбик */
+    .contact-links-container {
+        flex-direction: column; 
+        align-items: center;
+        max-width: none; /* Убираем ограничение ширины */
+        margin: 30px auto; /* Центрируем контейнер */
+        padding: 0; /* Убираем padding, чтобы кнопки занимали всю ширину */
+    }
+
+    .contact-text-link {
+        width: 85%; /* Чтобы они занимали больше места на маленьких экранах */
+        max-width: 300px; /* Ограничим ширину */
+        padding: 10px 20px;
+        font-size: 1em;
+        margin-left: 0 !important; /* Отменяем предыдущие margin для выравнивания */
+        margin-right: 0 !important; /* Отменяем предыдущие margin для выравнивания */
+    }
+
+    /* Кнопки доната на мобильных - в столбик */
+    .donate-buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .donate-buttons-container .button {
+        width: 85%; /* Занимаем больше ширины */
+        max-width: 300px;
+    }
+}
+
+/* Для самых маленьких экранов (ширина экрана до 480px) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6em;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        font-size: 0.9em;
+    }
+
+    header h2 {
+        font-size: 0.9em;
+    }
+
+    main {
+        margin: 10px 5px;
+        padding: 20px 10px;
+    }
+
+    section {
+        padding: 20px 15px;
+        margin-bottom: 30px;
+    }
+
+    section h2 {
+        font-size: 1.5em;
+    }
+
+    .button {
+        width: 95%;
+        padding: 12px 20px;
+        font-size: 0.8em;
+    }
+
+    .contact-text-link {
+        width: 95%;
+        font-size: 0.9em;
+    }
+}
